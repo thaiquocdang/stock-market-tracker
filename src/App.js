@@ -13,6 +13,7 @@ function App() {
               <StockRow ticker="goog" />
               <StockRow ticker="tsla" />
               <StockRow ticker="msft" />
+              <StockRow ticker="amzn" />
             </ul>
           </div>
         </div>

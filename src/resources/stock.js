@@ -18,7 +18,23 @@ export const stock = {
         }
     },
 
+    yesterdayClosePrice: (ticker, date) =>{
+        const yesterdayData = axios.get(stock.yesterdayCloseURL(ticker, date)).then(response => response.data);
+        return yesterdayData;
+    },
+
     latestPriceURL: (ticker)=>{
         return `${iex.base_url}/stock/${ticker}/intraday-prices?chartLast=1&token=${iex.api_token}`;
+    },
+
+    yesterdayCloseURL: (ticker, date) => {
+        var today = new Date(date).toISOString().split('T')[0].replace(/-/g,'')
+        console.log(today, 'today');
+
+        const url = `${iex.base_url}/ref-data/us/dates/trade/last/1/${today}?token=${iex.api_token}`;
+        console.log(url);
+        fetch(url).then((res) => res.json()).then(console.log)
+
+        return `${iex.base_url}/stock/${ticker}/intraday-prices?chartLast=1&exactDate=20200723&token=${iex.api_token}`;
     }
 }
