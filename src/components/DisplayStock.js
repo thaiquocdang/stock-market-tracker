@@ -7,15 +7,9 @@ export const DisplayStock = (props) => {
     const deleteStock = props.deleteStock;
     return (
         <div>
-            <div className="container">
-                <div className="col-md-5 mt-5">
-                    <div className="card">
-                        <ul className="list-group list-group-flush">
-                            {stockList.map((ticker) => <StockRow ticker={ticker} deleteStock={deleteStock}/>)}
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <ul className>
+                {stockList.map((ticker) => <StockRow ticker={ticker} deleteStock={deleteStock} />)}
+            </ul>
         </div>
     )
 }

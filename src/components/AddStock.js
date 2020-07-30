@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 export const AddStock = (props) => {
-    const handleSubmit = props.onSubmit;
+    const addStock = props.addStock;
+    const resetStockList = props.resetStockList;
     const [stockTicker, setStockTicker] = useState('')
 
     const handleOnChange = (e) => {
@@ -15,8 +16,8 @@ export const AddStock = (props) => {
                 <label>Enter a symbol to search share price</label> <br />
                 <input type="text" placeholder="example AAPL for Apple, TSLA for Tesla" onChange={handleOnChange} />
             </div>
-            <button onClick={() => handleSubmit(stockTicker)}>Add Stock</button>
-            <button>Reset List</button>
+            <button onClick={() => addStock(stockTicker)}>Add Stock</button>
+            <button onClick={() =>resetStockList() }>Reset List</button>
         </div>
     )
 }

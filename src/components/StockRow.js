@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { stock } from '../resources/stock';
+import './StockRow.css'
 
 export const StockRow = (props) => {
     const ticker = props.ticker;
@@ -23,11 +24,11 @@ export const StockRow = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             let result = await stock.latestPrice(ticker);
-            if(result){
+            if (result) {
                 setStockData(result[result.length - 1]);
             }
             console.log(result, 'resultt');
-            
+
 
             //get yesterday data
             // setYesterdayData(result[result.length-2])
@@ -37,7 +38,7 @@ export const StockRow = (props) => {
 
     // const priceChange = (stockData.close - yesterdayData.close).toFixed(2);
     // const percentageChange = (priceChange/yesterdayData.close*100).toFixed(2) ;
-   
+
 
     const changeStyle = () => {
         return {
@@ -47,15 +48,21 @@ export const StockRow = (props) => {
         }
     }
 
+    const displayChart = () => {
+        console.log('display chart');
+    }
+
     console.log(stockData);
     return (
-        <li className="list-group-item">
-            <b>{ticker}</b>
-            &nbsp; ${stockData.close}
+        <div className="stock-row">
+            <button onClick={() => deleteStock(ticker)}>X</button>
+            <span>{ticker}</span>
+            <span>${stockData.close}</span>
             <span className="change" style={changeStyle()}>
                 {stockData.change} &nbsp;({stockData.changePercent}%)
-        </span>
-            <button onClick = {() => deleteStock(ticker)}>Delete Stock</button>
-        </li>
+            </span>
+            <button onClick={displayChart()}>Chart</button>
+
+        </div>
     )
 }
