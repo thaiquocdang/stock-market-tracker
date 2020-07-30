@@ -2,41 +2,60 @@ import React, { useState, useEffect } from 'react'
 import { stock } from '../resources/stock';
 
 export const StockRow = (props) => {
-    const ticker = props.ticker.toUpperCase();
-    const [stockData, setStockData] = useState({});
-    const [yesterdayData, setYesterdayData] = useState({});
+    const ticker = props.ticker;
+    const deleteStock = props.deleteStock;
+    const [stockData, setStockData] = useState({
+        change: 0,
+        changeOverTime: 0,
+        changePercent: 0,
+        close: 0,
+        date: "",
+        high: 0,
+        label: "Jul 22",
+        low: 0,
+        open: 0,
+        uOpen: 0,
+        uVolume: 0,
+        volume: 0
+    });
+    // const [yesterdayData, setYesterdayData] = useState({});
 
-    useEffect( () => {
-        const fetchData = async () =>{
-            const result = await stock.latestPrice(ticker);
-            console.log(result, 'result');
-            //get today data
-            setStockData(result[result.length-1]);
+    useEffect(() => {
+        const fetchData = async () => {
+            let result = await stock.latestPrice(ticker);
+            if(result){
+                setStockData(result[result.length - 1]);
+            }
+            console.log(result, 'resultt');
             
+
             //get yesterday data
-            setYesterdayData(result[result.length-2])
+            // setYesterdayData(result[result.length-2])
         }
         fetchData();
     }, [])
 
-    const priceChange = (stockData.close - yesterdayData.close).toFixed(2);
-    const percentageChange = (priceChange/yesterdayData.close*100).toFixed(2) ;
+    // const priceChange = (stockData.close - yesterdayData.close).toFixed(2);
+    // const percentageChange = (priceChange/yesterdayData.close*100).toFixed(2) ;
+   
 
     const changeStyle = () => {
         return {
-            color: priceChange > 0 ? '#69c02c' : '#f23a0c' ,
+            color: stockData.change > 0 ? '#69c02c' : '#f23a0c',
             fontSize: '0.8rem',
             marginLeft: 6
         }
     }
 
+    console.log(stockData);
     return (
         <li className="list-group-item">
             <b>{ticker}</b>
             &nbsp; ${stockData.close}
             <span className="change" style={changeStyle()}>
-            {priceChange} &nbsp;({percentageChange}%)
+                {stockData.change} &nbsp;({stockData.changePercent}%)
         </span>
+            <button onClick = {() => deleteStock(ticker)}>Delete Stock</button>
         </li>
     )
 }
