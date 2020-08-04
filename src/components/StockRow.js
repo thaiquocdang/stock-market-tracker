@@ -27,17 +27,31 @@ export const StockRow = (props) => {
             if (result) {
                 setStockData(result[result.length - 1]);
             }
-            console.log(result, 'resultt');
+            // console.log(result, 'resultt');
 
 
             //get yesterday data
             // setYesterdayData(result[result.length-2])
+
+            // full list of stocks. However, it is not correct at the moment. Will come back to fix it later
+            // let list = await stock.listOfSymbols();
+            // console.log(list, 'listtttttttt');
         }
         fetchData();
+
+    
     }, [])
 
     // const priceChange = (stockData.close - yesterdayData.close).toFixed(2);
     // const percentageChange = (priceChange/yesterdayData.close*100).toFixed(2) ;
+
+    let changePercent;
+    if(stockData.changePercent){
+         changePercent = stockData.changePercent.toFixed(2);
+
+    } else {
+        changePercent = stockData.changePercent
+    }
 
 
     const changeStyle = () => {
@@ -52,17 +66,17 @@ export const StockRow = (props) => {
         console.log('display chart');
     }
 
-    console.log(stockData);
+    // console.log(stockData);
     return (
         <div className="stock-row">
-            <button onClick={() => deleteStock(ticker)}>X</button>
-            <span>{ticker}</span>
-            <span>${stockData.close}</span>
-            <span className="change" style={changeStyle()}>
-                {stockData.change} &nbsp;({stockData.changePercent}%)
-            </span>
-            <button onClick={displayChart()}>Chart</button>
-
+            <button className="btn" onClick={() => deleteStock(ticker)} >X</button>
+            <div className="stock-data">
+                <div>{ticker}</div>
+                <div>${stockData.close}</div>
+                <div>{stockData.change}</div>
+                <div lassName="change" style={changeStyle()}>({changePercent}%)</div>
+            </div>
+            <button className="btn" onClick={() => displayChart()}>Chart</button>
         </div>
     )
 }

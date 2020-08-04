@@ -16,8 +16,8 @@ export const AddStock = (props) => {
                 <label>Enter a symbol to search share price</label> <br />
                 <input type="text" placeholder="example AAPL for Apple, TSLA for Tesla" onChange={handleOnChange} />
             </div>
-            <button onClick={() => addStock(stockTicker)}>Add Stock</button>
-            <button onClick={() =>resetStockList() }>Reset List</button>
+            <button className="btn" onClick={() => addStock(stockTicker)}>Add Stock</button>
+            <button className="btn" onClick={() =>resetStockList() }>Reset List</button>
         </div>
     )
 }

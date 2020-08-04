@@ -21,6 +21,19 @@ export const stock = {
         return `${iex.base_url}/stock/${ticker}/chart/5d?includeToday=true&token=${iex.api_token}`;
     },
 
+
+    //call API to retrieve full list of stock. However, it is not correct at this time.
+    // listOfSymbols: async () => {
+    //     try{
+    //         const symbolURL = 'https://cloud.iexapis.com/ref-data/iex/symbols'
+    //         const symbolList = await axios.get(symbolURL);
+    //         console.log(symbolList, 'list of symbols');
+    //         return symbolList
+    //     }catch(error){
+    //         console.log(error);
+    //     }
+    // }
+
     // yesterdayCloseURL: (ticker, date) => {
     //     var today = new Date(date).toISOString().split('T')[0].replace(/-/g,'')
     //     console.log(today, 'today');

@@ -6,10 +6,8 @@ export const DisplayStock = (props) => {
     const stockList = props.stockList;
     const deleteStock = props.deleteStock;
     return (
-        <div>
-            <ul className>
+        <div className="stock-board">
                 {stockList.map((ticker) => <StockRow ticker={ticker} deleteStock={deleteStock} />)}
-            </ul>
         </div>
     )
 }
