@@ -4,7 +4,7 @@ import { AddStock } from './AddStock'
 import { render } from '@testing-library/react'
 import { fireEvent } from '@testing-library/dom'
 
-describe('Test case form AddStock component', () => {
+describe('Test case for AddStock component', () => {
   test('Render without crash', () => {
     const div = document.createElement('div')
     ReactDom.render(<AddStock></AddStock>, div)
@@ -70,7 +70,7 @@ describe('Test case form AddStock component', () => {
     fireEvent.click(componentAddStock.getByTestId('addstock-button'))
     expect(mockFnAddStock).toHaveBeenCalledTimes(1)
     expect(mockFnAddStock.mock.calls[0][0]).toBe('aapl')
-    console.log(mockFnAddStock.mock)
+    // console.log(mockFnAddStock.mock)
 
     //b3 reset stock
     fireEvent.click(componentAddStock.getByTestId('resetlist-button'))

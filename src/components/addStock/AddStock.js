@@ -20,6 +20,11 @@ export const AddStock = (props) => {
           placeholder='example AAPL for Apple, TSLA for Tesla'
           onChange={handleOnChange}
           data-testid='stock-input'
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              addStock(stockTicker)
+            }
+          }}
         />
       </div>
       <button

@@ -19,33 +19,20 @@ export const StockRow = (props) => {
     uVolume: 0,
     volume: 0,
   })
-  // const [yesterdayData, setYesterdayData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
       let result = await stock.latestPrice(ticker)
-      console.log(result)
       if (result) {
         setStockData(result[result.length - 1])
       }
-      // console.log(result, 'resultt');
-
-      //get yesterday data
-      // setYesterdayData(result[result.length-2])
-
-      // full list of stocks. However, it is not correct at the moment. Will come back to fix it later
-      // let list = await stock.listOfSymbols();
-      // console.log(list, 'listtttttttt');
     }
     fetchData()
-  }, [])
-
-  // const priceChange = (stockData.close - yesterdayData.close).toFixed(2);
-  // const percentageChange = (priceChange/yesterdayData.close*100).toFixed(2) ;
+  }, [ticker])
 
   let changePercent
   if (stockData.changePercent) {
-    changePercent = stockData.changePercent.toFixed(2)
+    changePercent = (stockData.changePercent * 100).toFixed(2)
   } else {
     changePercent = stockData.changePercent
   }
@@ -62,21 +49,29 @@ export const StockRow = (props) => {
     console.log('display chart')
   }
 
-  // console.log(stockData);
   return (
     <div className='stock-row'>
-      <button className='btn' onClick={() => deleteStock(ticker)}>
+      <button
+        className='btn'
+        onClick={() => deleteStock(ticker)}
+        data-testid='deleterow-button'
+      >
         X
       </button>
       <div className='stock-data'>
-        <div>{ticker}</div>
+        <div>{ticker.toUpperCase()}</div>
         <div>${stockData.close}</div>
         <div>{stockData.change.toFixed(2)}</div>
-        <div lassName='change' style={changeStyle()}>
+        <div className='change' style={changeStyle()}>
           ({changePercent}%)
         </div>
       </div>
-      <button className='btn' onClick={() => displayChart()}>
+
+      <button
+        className='btn display-chart'
+        onClick={() => displayChart()}
+        data-testid='displaychart-button'
+      >
         Chart
       </button>
     </div>
