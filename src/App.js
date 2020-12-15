@@ -20,7 +20,7 @@ export default function App() {
   const deleteStock = (ticker) => {
     const updateStockList = stockList.filter((i) => i != ticker.toLowerCase())
     setStockList(updateStockList)
-    SAVE_DATA_TO_LOCAL_STORAGE(stockList)
+    SAVE_DATA_TO_LOCAL_STORAGE(updateStockList)
   }
 
   //delete watch list
